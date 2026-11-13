@@ -1,0 +1,9 @@
+{% extends 'admin/base.html' %}{% block title %}Projects{% endblock %}
+{% block body %}
+<div class="head"><h1>Projects</h1><a class="btn" href="{{ url_for('project_edit') }}">+ Add project</a></div>
+<div class="card"><table class="tbl"><tr><th></th><th>Project</th><th>Client</th><th>kW</th><th>Status</th><th></th></tr>
+{% for r in rows %}<tr><td><img class="thumb" src="{{ asset(r.image) }}" alt=""></td><td><b>{{ r.title }}</b><br><span class="muted">{{ r.period }}</span></td><td>{{ r.client }}</td><td>{{ '%g' % r.capacity_kw if r.capacity_kw else '-' }}</td><td>{{ 'Live' if r.active else 'Hidden' }}</td>
+<td class="act"><a class="btn sm" href="{{ url_for('project_edit', pid=r.id) }}">Edit</a>
+<form method="post" action="{{ url_for('project_delete', pid=r.id) }}" onsubmit="return confirm('Delete this project permanently?')"><input type="hidden" name="_csrf" value="{{ csrf_token() }}"><button class="btn sm danger">Delete</button></form></td></tr>{% endfor %}
+</table></div>
+{% endblock %}

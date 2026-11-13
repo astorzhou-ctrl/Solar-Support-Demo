@@ -1,0 +1,11 @@
+{% extends 'admin/base.html' %}{% block title %}Products{% endblock %}
+{% block body %}
+<div class="head"><h1>Products</h1><a class="btn" href="{{ url_for('product_edit') }}">+ Add product</a></div>
+<div class="card"><table class="tbl"><tr><th></th><th>Name</th><th>Category</th><th>Price</th><th>Status</th><th></th></tr>
+{% for r in rows %}<tr><td><img class="thumb" src="{{ asset(r.image) }}" alt=""></td><td><b>{{ r.name }}</b><br><span class="muted">{{ r.badge }}</span></td><td>{{ r.category }}</td>
+<td>{% if r.price is not none %}US${{ '%g' % r.price }} {{ r.unit }}{% else %}-{% endif %}{% if not r.show_price %}<br><span class="muted">price hidden</span>{% endif %}</td>
+<td>{{ 'Live' if r.active else 'Hidden' }}</td>
+<td class="act"><a class="btn sm" href="{{ url_for('product_edit', pid=r.id) }}">Edit</a>
+<form method="post" action="{{ url_for('product_delete', pid=r.id) }}" onsubmit="return confirm('Delete this product permanently?')"><input type="hidden" name="_csrf" value="{{ csrf_token() }}"><button class="btn sm danger">Delete</button></form></td></tr>{% endfor %}
+</table></div>
+{% endblock %}

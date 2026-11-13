@@ -1,0 +1,16 @@
+{% extends 'admin/base.html' %}{% block title %}Website text and pictures{% endblock %}
+{% block body %}
+<h1>Website text and pictures</h1><p class="muted">Change any wording or picture on the website. Scroll to the part you want, edit it and press <b>Save all changes</b> at the bottom.</p>
+<div class="jump">{% for g in groups %}<a href="#{{ g|replace(' ','-') }}">{{ g }}</a>{% endfor %}</div>
+<form method="post" enctype="multipart/form-data"><input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+{% for g, rows in groups.items() %}
+<section class="card form" id="{{ g|replace(' ','-') }}"><h2>{{ g }}</h2>
+{% for r in rows %}
+{% if r.kind == 'image' %}
+<div class="imgfield"><span class="lbl">{{ r.label }}</span>{% if r.value %}<img class="preview" src="{{ asset(r.value) }}" alt="">{% endif %}
+<div class="grid2"><label>Upload a new picture<input type="file" name="file__{{ r.key }}" accept="image/*"></label><label>or choose an existing one<select name="choice__{{ r.key }}"><option value="">Keep current</option>{% for l in lib %}<option value="{{ l }}">{{ l }}</option>{% endfor %}</select></label></div></div>
+{% elif r.kind == 'area' %}<label>{{ r.label }}<textarea name="{{ r.key }}" rows="{{ 7 if r.key == 'calc_appliances' else 4 }}">{{ r.value }}</textarea></label>
+{% else %}<label>{{ r.label }}<input name="{{ r.key }}" type="{{ 'url' if r.kind=='url' else 'text' }}" value="{{ r.value }}"></label>{% endif %}
+{% endfor %}</section>{% endfor %}
+<div class="savebar sticky"><button class="btn">Save all changes</button></div></form>
+{% endblock %}

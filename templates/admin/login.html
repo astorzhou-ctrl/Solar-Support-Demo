@@ -1,0 +1,9 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Owner login | {{ c('company_name') }}</title><link rel="icon" href="{{ asset('img/favicon.png') }}"><link rel="stylesheet" href="{{ asset('css/admin.css') }}"></head>
+<body class="loginpage"><form class="loginbox" method="post" autocomplete="on">
+<img src="{{ asset('img/logo.png') }}" alt="{{ c('company_name') }}" width="200"><h1>Owner login</h1><p class="muted">Sign in to update prices, photos and website content.</p>
+{% if error %}<div class="flash err" role="alert">{{ error }}</div>{% endif %}
+<input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+<label>Username<input name="username" autocomplete="username" required autofocus></label>
+<label>Password<input name="password" type="password" autocomplete="current-password" required></label>
+<button class="btn">Sign in</button><a class="back" href="{{ url_for('index') }}">&larr; Back to the website</a></form></body></html>

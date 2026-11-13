@@ -1,0 +1,15 @@
+{% extends 'admin/base.html' %}{% block title %}{{ 'Edit' if p else 'New' }} project{% endblock %}
+{% block body %}
+<h1>{{ 'Edit project' if p else 'Add a project' }}</h1>
+<form method="post" enctype="multipart/form-data" class="card form"><input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+<div class="grid2"><label>Project title<input name="title" value="{{ p.title if p }}" required maxlength="160"></label><label>Client name<input name="client" value="{{ p.client if p }}" maxlength="160"></label>
+<label>System size (kW)<input name="capacity_kw" inputmode="decimal" value="{{ '' if not p or p.capacity_kw is none else ('%g' % p.capacity_kw) }}"></label>
+<label>Date (optional)<input name="period" value="{{ p.period if p }}" placeholder="June 2025"></label></div>
+<label>Description<textarea name="summary" rows="4" maxlength="1000">{{ p.summary if p }}</textarea></label>
+<div class="grid2"><label>Order on page (small number first)<input name="sort" value="{{ p.sort if p else 100 }}"></label><div class="checks"><label class="sw"><input type="checkbox" name="active" {{ 'checked' if not p or p.active }}><i></i> Show on the website</label></div></div>
+<fieldset><legend>Picture</legend>{% if p and p.image %}<img class="preview" src="{{ asset(p.image) }}" alt="">{% endif %}
+<div class="grid2"><label>Upload a new picture<input type="file" name="image_file" accept="image/*"></label>
+<label>or choose an existing picture<select name="image_choice"><option value="">Keep current</option>{% for l in lib %}<option value="{{ l }}">{{ l }}</option>{% endfor %}</select></label></div></fieldset>
+<p class="muted">Do not put customer phone numbers in the description.</p>
+<div class="savebar"><button class="btn">Save project</button><a class="btn ghost" href="{{ url_for('projects_list') }}">Cancel</a></div></form>
+{% endblock %}

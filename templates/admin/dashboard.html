@@ -1,0 +1,20 @@
+{% extends 'admin/base.html' %}{% block title %}Dashboard{% endblock %}
+{% block body %}
+<h1>Welcome back</h1><p class="muted">Everything you change here goes live on the website straight away.</p>
+<div class="stats">
+  <a class="stat hot" href="{{ url_for('quotes') }}"><b>{{ stats.new }}</b><span>new quote requests</span></a>
+  <a class="stat" href="{{ url_for('products_list') }}"><b>{{ stats.products }}</b><span>products on the website</span></a>
+  <a class="stat" href="{{ url_for('projects_list') }}"><b>{{ stats.projects }}</b><span>projects shown</span></a>
+  <a class="stat" href="{{ url_for('media') }}"><b>{{ stats.photos }} / {{ stats.videos }}</b><span>photos / videos</span></a>
+</div>
+<div class="cards">
+  <a class="card act" href="{{ url_for('prices') }}"><h3>Update prices</h3><p>Change a price, show or hide it, or switch a product off. One page, one Save button.</p></a>
+  <a class="card act" href="{{ url_for('media') }}"><h3>Upload photos and videos</h3><p>Add new installation pictures and clips to the gallery.</p></a>
+  <a class="card act" href="{{ url_for('content_edit') }}"><h3>Edit website text</h3><p>Change the banner, counters, services text, phone numbers and social links.</p></a>
+  <a class="card act" href="{{ url_for('product_edit') }}"><h3>Add a new product</h3><p>Create a system or component with a photo and specification list.</p></a>
+</div>
+<h2>Latest quote requests</h2>
+{% if recent %}<div class="card"><table class="tbl"><tr><th>When</th><th>Name</th><th>Contact</th><th>Interested in</th></tr>
+{% for q in recent %}<tr><td>{{ q.created[:16].replace('T',' ') }}</td><td>{{ q.name }}</td><td>{{ q.phone }}{% if q.email %}<br>{{ q.email }}{% endif %}</td><td>{{ q.product or '-' }}</td></tr>{% endfor %}</table></div>
+{% else %}<p class="muted">No requests yet. They will appear here when customers use the website form.</p>{% endif %}
+{% endblock %}

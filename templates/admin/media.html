@@ -1,0 +1,17 @@
+{% extends 'admin/base.html' %}{% block title %}Photos and videos{% endblock %}
+{% block body %}
+<h1>Photos and videos</h1><p class="muted">Upload pictures (JPG, PNG, WebP) or short videos (MP4, WebM, up to 90 MB). They appear in the website gallery straight away. For smooth playback keep videos short and compressed.</p>
+<form method="post" enctype="multipart/form-data" class="card form uploader"><input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+<div class="grid3"><label>Choose files<input type="file" name="files" multiple accept="image/*,video/mp4,video/webm" required></label>
+<label>Gallery group (for photos)<select name="category">{% for cc in cats %}<option>{{ cc }}</option>{% endfor %}</select></label>
+<label>Caption (optional)<input name="title" placeholder="Used as the caption"></label></div>
+<div class="savebar"><button class="btn">Upload</button></div></form>
+<h2>Gallery items</h2>
+<div class="mgrid">{% for r in rows %}
+<form method="post" action="{{ url_for('media_update', mid=r.id) }}" class="mitem"><input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+{% if r.kind == 'video' %}<video src="{{ asset(r.path) }}" poster="{{ asset(r.poster) if r.poster }}" muted preload="metadata"></video>{% else %}<img src="{{ asset(r.path) }}" alt="" loading="lazy">{% endif %}
+<input name="title" value="{{ r.title }}" aria-label="Caption">
+{% if r.kind == 'image' %}<select name="category" aria-label="Group">{% for cc in cats %}<option {{ 'selected' if r.category==cc }}>{{ cc }}</option>{% endfor %}{% if r.category not in cats %}<option selected>{{ r.category }}</option>{% endif %}</select>{% else %}<span class="muted">Video</span>{% endif %}
+<label class="sw"><input type="checkbox" name="show" {{ 'checked' if r.show_in_gallery }}><i></i> Show</label>
+<div class="row"><button class="btn sm" name="action" value="save">Save</button><button class="btn sm danger" name="action" value="delete" onclick="return confirm('Remove this item?')">Remove</button></div></form>{% endfor %}</div>
+{% endblock %}

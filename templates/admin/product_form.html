@@ -1,0 +1,29 @@
+{% extends 'admin/base.html' %}{% block title %}{{ 'Edit' if p else 'New' }} product{% endblock %}
+{% block body %}
+<h1>{{ 'Edit product' if p else 'Add a product' }}</h1>
+<form method="post" enctype="multipart/form-data" class="card form"><input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+<div class="grid2">
+<label>Product name<input name="name" value="{{ p.name if p }}" required maxlength="160"></label>
+<label>Badge (small label, optional)<input name="badge" value="{{ p.badge if p }}" placeholder="Basic, Premium, New" maxlength="30"></label>
+<label>Category<select name="category">{% for cc in cats %}<option {{ 'selected' if p and p.category==cc }}>{{ cc }}</option>{% endfor %}</select></label>
+<label>or create a new category<input name="category_new" placeholder="Leave empty to use the list"></label>
+</div>
+<label>Short description<input name="summary" value="{{ p.summary if p }}" maxlength="300"></label>
+<label>What is included (one item per line)<textarea name="specs" rows="8">{{ p.specs if p }}</textarea></label>
+<div class="grid3">
+<label>Price in US$<input name="price" inputmode="decimal" value="{{ '' if not p or p.price is none else ('%g' % p.price) }}" placeholder="leave empty if none"></label>
+<label>Unit (optional)<input name="unit" value="{{ p.unit if p }}" placeholder="per day"></label>
+<label>Order on page (small number first)<input name="sort" value="{{ p.sort if p else 100 }}"></label>
+</div>
+<div class="checks"><label class="sw"><input type="checkbox" name="show_price" {{ 'checked' if not p or p.show_price }}><i></i> Show the price on the website</label>
+<label class="sw"><input type="checkbox" name="active" {{ 'checked' if not p or p.active }}><i></i> Show this product on the website</label></div>
+<fieldset><legend>Used by the calculator (complete systems only)</legend><div class="grid3">
+<label>Inverter size (kVA)<input name="inverter_kva" inputmode="decimal" value="{{ '' if not p or p.inverter_kva is none else p.inverter_kva }}"></label>
+<label>Battery size (kWh)<input name="battery_kwh" inputmode="decimal" value="{{ '' if not p or p.battery_kwh is none else p.battery_kwh }}"></label>
+<label>Solar panels (kW)<input name="pv_kwp" inputmode="decimal" value="{{ '' if not p or p.pv_kwp is none else p.pv_kwp }}"></label></div>
+<p class="muted">Leave these empty for products that are not complete systems.</p></fieldset>
+<fieldset><legend>Picture</legend>{% if p and p.image %}<img class="preview" src="{{ asset(p.image) }}" alt="">{% endif %}
+<div class="grid2"><label>Upload a new picture<input type="file" name="image_file" accept="image/*"></label>
+<label>or choose an existing picture<select name="image_choice"><option value="">Keep current</option>{% for l in lib %}<option value="{{ l }}">{{ l }}</option>{% endfor %}</select></label></div></fieldset>
+<div class="savebar"><button class="btn">Save product</button><a class="btn ghost" href="{{ url_for('products_list') }}">Cancel</a></div></form>
+{% endblock %}

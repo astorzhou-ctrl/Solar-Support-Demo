@@ -1,0 +1,12 @@
+{% extends 'admin/base.html' %}{% block title %}Quote requests{% endblock %}
+{% block body %}
+<h1>Quote requests</h1><p class="muted">Enquiries sent through the website form and calculator. Call or WhatsApp the customer, then mark it done.</p>
+{% if rows %}{% for q in rows %}
+<article class="card quote {{ q.status }}"><div class="qhead"><b>{{ q.name }}</b><span class="muted">{{ q.created[:16].replace('T',' ') }}</span><span class="tag {{ q.status }}">{{ 'New' if q.status=='new' else 'Done' }}</span></div>
+<p class="contact-line">{% if q.phone %}<a href="tel:{{ q.phone }}">{{ q.phone }}</a>{% endif %}{% if q.phone %} &nbsp; <a href="https://wa.me/{{ q.phone|replace('+','')|replace(' ','') }}" target="_blank" rel="noopener">WhatsApp</a>{% endif %}{% if q.email %} &nbsp; <a href="mailto:{{ q.email }}">{{ q.email }}</a>{% endif %}</p>
+{% if q.product %}<p><b>Interested in:</b> {{ q.product }}</p>{% endif %}<p class="msgtext">{{ q.message }}</p>{% if q.extra %}<p class="muted">{{ q.extra }}</p>{% endif %}
+<form method="post" class="row"><input type="hidden" name="_csrf" value="{{ csrf_token() }}"><input type="hidden" name="id" value="{{ q.id }}">
+{% if q.status=='new' %}<button class="btn sm" name="action" value="done">Mark as done</button>{% else %}<button class="btn sm ghost" name="action" value="new">Mark as new</button>{% endif %}
+<button class="btn sm danger" name="action" value="delete" onclick="return confirm('Delete this request?')">Delete</button></form></article>{% endfor %}
+{% else %}<div class="card"><p class="muted">No requests yet.</p></div>{% endif %}
+{% endblock %}

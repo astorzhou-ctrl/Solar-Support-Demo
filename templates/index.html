@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{ c('company_name') }} | Solar energy, inverters, batteries and installation in Zimbabwe</title>
+<meta name="description" content="{{ c('company_name') }} is a leading solar EPC company in Harare, Zimbabwe: turnkey residential, commercial, industrial and agricultural solar systems, batteries, inverters and energy management.">
+<meta name="theme-color" content="#0F1450">
+<meta property="og:title" content="{{ c('company_name') }}: {{ c('tagline') }}">
+<meta property="og:description" content="Turnkey solar systems for homes, businesses, industry and farms in Zimbabwe.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('css/site.css') }}">
+<script type="application/ld+json">{{ {"@context":"https://schema.org","@type":"LocalBusiness","name":c('company_name'),"telephone":c('phone_display'),"email":c('email'),"address":{"@type":"PostalAddress","streetAddress":c('address'),"addressCountry":"ZW"},"sameAs":[c('facebook'),c('instagram'),c('tiktok')]}|tojson }}</script>
+</head>
+<body>
+{% include '_icons.html' %}
+<div class="progress" id="progress"></div>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ============ TOP BAR + HEADER ============ -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="tb-left">
+      <a href="tel:{{ c('phone_tel') }}"><svg class="i"><use href="#i-phone"/></svg>{{ c('phone_display') }}</a>
+      <a href="mailto:{{ c('email') }}"><svg class="i"><use href="#i-mail"/></svg>{{ c('email') }}</a>
+      <span class="tb-addr"><svg class="i"><use href="#i-pin"/></svg>{{ c('address') }}</span>
+    </div>
+    <div class="tb-social">
+      <a href="{{ c('facebook') }}" target="_blank" rel="noopener" aria-label="Facebook"><svg class="i"><use href="#i-facebook"/></svg></a>
+      <a href="{{ c('instagram') }}" target="_blank" rel="noopener" aria-label="Instagram"><svg class="i"><use href="#i-instagram"/></svg></a>
+      <a href="{{ c('tiktok') }}" target="_blank" rel="noopener" aria-label="TikTok"><svg class="i"><use href="#i-tiktok"/></svg></a>
+      <a href="https://wa.me/{{ phone_digits }}" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="i"><use href="#i-whatsapp"/></svg></a>
+    </div>
+  </div>
+</div>
+<header class="site" id="header">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="{{ c('company_name') }} home"><img src="{{ asset('img/logo.png') }}" alt="{{ c('company_name') }}, {{ c('tagline') }}" width="190" height="80"></a>
+    <nav id="nav" aria-label="Main">
+      <a href="#about">About</a><a href="#services">Services</a><a href="#products">Products</a><a href="#calculator">Calculator</a><a href="#projects">Projects</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a>
+    </nav>
+    <div class="head-cta">
+      <a class="btn btn-primary" href="#contact" data-quote="">Get a free quote</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-slides" aria-hidden="true">
+    {% for img, cap in slides %}
+    <div class="slide {% if loop.first %}on{% endif %}" style="background-image:url('{{ asset(img) }}')" data-cap="{{ cap }}"></div>
+    {% endfor %}
+  </div>
+  <div class="hero-shade"></div>
+  <div class="sunorb" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap hero-in">
+    <div class="hero-copy">
+      <span class="kicker"><svg class="i"><use href="#i-sun"/></svg>{{ c('hero_kicker') }}</span>
+      <h1>{{ c('hero_title') }}</h1>
+      <p class="lede">{{ c('hero_sub') }}</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary btn-lg" href="#contact" data-quote="">Get a free quote <svg class="i"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-ghost btn-lg" href="#calculator"><svg class="i"><use href="#i-calc"/></svg>Calculate my system</a>
+      </div>
+      <ul class="hero-pills">
+        <li><svg class="i"><use href="#i-check"/></svg>Residential</li><li><svg class="i"><use href="#i-check"/></svg>Commercial</li>
+        <li><svg class="i"><use href="#i-check"/></svg>Industrial</li><li><svg class="i"><use href="#i-check"/></svg>Agricultural</li>
+      </ul>
+    </div>
+    <aside class="hero-card" aria-label="Free site assessment">
+      <span class="pulse"></span>
+      <b>Free site assessment</b>
+      <p>Tell us what you want to power and we will design the right system for your budget.</p>
+      <a href="https://wa.me/{{ phone_digits }}?text={{ 'Hello Solar Support, I would like a free site assessment.'|urlencode }}" target="_blank" rel="noopener" class="btn btn-wa btn-sm"><svg class="i"><use href="#i-whatsapp"/></svg>Chat on WhatsApp</a>
+    </aside>
+  </div>
+  <div class="wrap hero-foot">
+    <div class="slide-cap" id="slideCap"></div>
+    <div class="slide-dots" id="slideDots">{% for img, cap in slides %}<button aria-label="Show picture {{ loop.index }}"{% if loop.first %} class="on"{% endif %}></button>{% endfor %}</div>
+    <a class="scroll-hint" href="#about" aria-label="Scroll down"><svg class="i"><use href="#i-down"/></svg></a>
+  </div>
+</section>
+
+<!-- ============ COUNTERS ============ -->
+<section class="counters">
+  <div class="wrap grid4">
+    {% for k in counters %}
+    <div class="counter reveal"><div class="num"><span class="count" data-value="{{ k.value }}">0</span><em>{{ k.suffix }}</em></div><p>{{ k.label }}</p></div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="about-media reveal">
+      <div class="hexframe h1"><img src="{{ asset(c('about_img_1')) }}" alt="Large rooftop solar installation" loading="lazy"></div>
+      <div class="hexframe h2"><img src="{{ asset(c('about_img_2')) }}" alt="Solar Support installers fitting panels on a roof" loading="lazy"></div>
+      <div class="badge-float"><b>EPC</b><span>Design, supply,<br>build and monitor</span></div>
+    </div>
+    <div class="about-text reveal">
+      <span class="eyebrow">Who we are</span>
+      <h2>{{ c('about_heading') }}</h2>
+      <p>{{ c('about_text_1') }}</p>
+      <p>{{ c('about_text_2') }}</p>
+      <p>{{ c('about_text_3') }}</p>
+      <ul class="ticks">
+        <li><svg class="i"><use href="#i-check"/></svg>Grid-tied and battery storage (BESS) systems</li>
+        <li><svg class="i"><use href="#i-check"/></svg>In-house engineers and installation teams</li>
+        <li><svg class="i"><use href="#i-check"/></svg>Projects managed hands-on from start to finish</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap vm">
+    <article class="vm-card reveal"><svg class="i big"><use href="#i-eye"/></svg><h3>Our vision</h3><p>{{ c('vision_text') }}</p></article>
+    <article class="vm-card reveal"><svg class="i big"><use href="#i-target"/></svg><h3>Our mission</h3><p>{{ c('mission_text') }}</p></article>
+    <article class="vm-card reveal"><svg class="i big"><use href="#i-leaf"/></svg><h3>Our aim</h3><p>{{ c('aim_text') }}</p></article>
+  </div>
+</section>
+
+<!-- ============ WHY CHOOSE US ============ -->
+<section class="why" id="why">
+  <div class="why-bg" style="background-image:url('{{ asset(c('why_img')) }}')"></div>
+  <div class="wrap">
+    <div class="sec-head light reveal"><span class="eyebrow">Why choose us</span><h2>Reliable power, from people who stand behind it</h2></div>
+    <div class="why-grid">
+      {% for t, x in why %}
+      <article class="why-card reveal"><span class="why-n">{{ '%02d'|format(loop.index) }}</span><svg class="i big"><use href="#i-{{ ['shield','tools','tag','headset','bolt'][loop.index0] }}"/></svg><h3>{{ t }}</h3><p>{{ x }}</p></article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">Our services</span><h2>Solar solutions for every kind of energy user</h2><p>From the first site visit to remote monitoring, one team manages every phase of your project.</p></div>
+    {% for t, x, im in services %}
+    <article class="svc {% if loop.index is even %}flip{% endif %} reveal">
+      <div class="svc-img"><img src="{{ asset(im) }}" alt="{{ t }}" loading="lazy"><span class="svc-no">{{ '%02d'|format(loop.index) }}</span></div>
+      <div class="svc-txt">
+        <span class="eyebrow">Service {{ loop.index }}</span>
+        <h3>{{ t }}</h3>
+        <p>{{ x }}</p>
+        <div class="svc-cta">
+          <a class="btn btn-primary" href="#contact" data-quote="{{ t }}">Ask about this</a>
+          {% if loop.first %}<a class="btn btn-outline" href="#calculator">Size my system</a>{% endif %}
+          {% if loop.last %}<a class="btn btn-outline" href="#energy">See testing and rental</a>{% endif %}
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ============ ENERGY MANAGEMENT ============ -->
+{% set ns = namespace(mi=None) %}{% for p in products %}{% if 'Mi550' in p.name and not ns.mi %}{% set ns.mi = p %}{% endif %}{% endfor %}{% set mi = ns.mi %}
+<section class="energy" id="energy">
+  <div class="wrap energy-grid">
+    <div class="energy-media reveal">
+      <figure class="logger"><img src="{{ asset(c('em_img_1')) }}" alt="Energy management and power quality logging equipment" loading="lazy"></figure>
+      <figure class="field"><img src="{{ asset(c('em_img_2')) }}" alt="Power quality analyser with probes" loading="lazy"></figure>
+      <figure class="meter"><img src="{{ asset(c('em_img_3')) }}" alt="Distribution board used in energy audits" loading="lazy"></figure>
+    </div>
+    <div class="energy-text reveal">
+      <span class="eyebrow">Energy management</span>
+      <h2>Know your power. Cut your bills.</h2>
+      <p>{{ c('svc_4_text') }}</p>
+      <ul class="chips6">
+        <li><svg class="i"><use href="#i-sun"/></svg>Solar performance analysis</li>
+        <li><svg class="i"><use href="#i-wave"/></svg>Power quality assessments</li>
+        <li><svg class="i"><use href="#i-chart"/></svg>Energy audits and load studies</li>
+        <li><svg class="i"><use href="#i-check"/></svg>Commissioning and verification</li>
+        <li><svg class="i"><use href="#i-bolt"/></svg>Generator and hybrid testing</li>
+        <li><svg class="i"><use href="#i-doc"/></svg>Compliance reporting</li>
+      </ul>
+      {% if mi %}
+      <div class="rental">
+        <div><small>Mi550 analyser rental</small><b>{% if mi.show_price and mi.price is not none %}US${{ mi.price|money }}<span> {{ mi.unit }}</span>{% else %}Request price{% endif %}</b></div>
+        <div><small>Refundable deposit</small><b>{{ c('rental_deposit') }}</b></div>
+        <div><small>Report processing fee</small><b>{{ c('rental_fee') }}</b></div>
+      </div>
+      <p class="fine">All prices in US dollars. Terms and conditions apply. On-site testing and logging available nationwide.</p>
+      {% endif %}
+      <div class="svc-cta"><a class="btn btn-primary" href="#contact" data-quote="Power quality testing or analyser rental">Book a power quality assessment</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS (animated) ============ -->
+<section class="flow" id="how">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">How it works</span><h2>From sunshine to your sockets</h2><p>Panels turn sunlight into power, the hybrid inverter manages it, and the battery keeps your lights on when the grid is off.</p></div>
+    <div class="flow-svg reveal">
+      <svg viewBox="0 0 1000 300" role="img" aria-label="Animated diagram: sun to solar panels to hybrid inverter to battery and home">
+        <defs>
+          <linearGradient id="fg1" x1="0" x2="1"><stop offset="0" stop-color="#FFB300"/><stop offset="1" stop-color="#F26B1D"/></linearGradient>
+          <path id="p1" d="M170 150 H330"/><path id="p2" d="M470 150 H610"/><path id="p3" d="M740 150 C790 150 790 70 850 70"/><path id="p4" d="M740 150 C790 150 790 230 850 230"/>
+        </defs>
+        <g class="rays"><circle cx="90" cy="150" r="46" fill="url(#fg1)"/>{% for a in range(0,360,30) %}<line x1="90" y1="150" x2="90" y2="78" transform="rotate({{ a }} 90 150)" stroke="#FFB300" stroke-width="5" stroke-linecap="round" stroke-dasharray="0 52 18 100"/>{% endfor %}</g>
+        <g><rect x="330" y="92" width="140" height="116" rx="12" fill="#0F1450"/>{% for r in range(3) %}{% for cc in range(4) %}<rect x="{{ 340 + cc*32 }}" y="{{ 102 + r*34 }}" width="28" height="30" rx="3" fill="#2689C6" opacity=".85"/>{% endfor %}{% endfor %}</g>
+        <g><rect x="610" y="100" width="130" height="100" rx="14" fill="#fff" stroke="#0F1450" stroke-width="4"/><rect x="628" y="116" width="94" height="36" rx="6" fill="#0F1450"/><text x="675" y="141" text-anchor="middle" font-family="Outfit,Poppins,sans-serif" font-weight="700" font-size="18" fill="#6CF0A8">HYBRID</text><circle cx="640" cy="176" r="6" fill="#1E9E5A"/><circle cx="662" cy="176" r="6" fill="#FFB300"/><circle cx="684" cy="176" r="6" fill="#cbd5e6"/></g>
+        <g><rect x="850" y="36" width="120" height="68" rx="12" fill="#1E9E5A"/><rect x="880" y="26" width="16" height="12" rx="3" fill="#7A8AA6"/><rect x="924" y="26" width="16" height="12" rx="3" fill="#7A8AA6"/><path d="M915 48l-18 24h13l-5 18 22-28h-13z" fill="#fff"/></g>
+        <g><path d="M850 232 l60 -42 l60 42 v52 h-120z" fill="#F26B1D"/><rect x="895" y="244" width="30" height="40" fill="#fff"/><rect x="866" y="246" width="20" height="18" fill="#fff" opacity=".8"/></g>
+        <g class="flowdots" fill="#FFB300">
+          {% for p in ['p1','p2','p3','p4'] %}{% for d in range(3) %}<circle r="6"><animateMotion dur="2.4s" begin="{{ d*0.8 }}s" repeatCount="indefinite"><mpath href="#{{ p }}"/></animateMotion></circle>{% endfor %}{% endfor %}
+        </g>
+        <g font-family="Inter,sans-serif" font-size="15" font-weight="600" fill="#0F1450" text-anchor="middle">
+          <text x="90" y="238">Sun</text><text x="400" y="238">Solar panels</text><text x="675" y="238">Hybrid inverter</text><text x="910" y="132">Battery</text><text x="910" y="300">Your home</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRODUCTS ============ -->
+<section class="products" id="products">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">Products and prices</span><h2>Complete systems, ready to install</h2><p>Every system includes quality components, protection and professional installation. Prices are in US dollars.</p></div>
+    <div class="tabs reveal" role="tablist">
+      {% for cat in cats %}<button role="tab" class="tab {% if loop.first %}on{% endif %}" data-tab="{{ loop.index0 }}" aria-selected="{{ 'true' if loop.first else 'false' }}">{{ cat }}</button>{% endfor %}
+    </div>
+    {% for cat in cats %}
+    <div class="pgrid tabpanel {% if loop.first %}on{% endif %}" data-panel="{{ loop.index0 }}">
+      {% for p in products if p.category == cat %}
+      <article class="pcard {% if p.badge == 'Premium' %}premium{% endif %} reveal">
+        <div class="pimg"><img src="{{ asset(p.image) }}" alt="{{ p.name }}" loading="lazy">{% if p.badge %}<span class="pbadge">{{ p.badge }}</span>{% endif %}</div>
+        <div class="pbody">
+          <h3>{{ p.name }}</h3>
+          <p class="psum">{{ p.summary }}</p>
+          <div class="price">{% if p.show_price and p.price is not none %}<small>US$</small><b>{{ p.price|money }}</b>{% if p.unit %}<span>{{ p.unit }}</span>{% endif %}{% else %}<b class="rq">Request price</b>{% endif %}</div>
+          <ul class="specs">{% for s in p.specs_list %}<li><svg class="i"><use href="#i-check"/></svg>{{ s }}</li>{% endfor %}</ul>
+          <div class="pcta">
+            <button class="btn btn-primary" data-quote="{{ p.name }}">Get this quote</button>
+            <a class="btn btn-wa icon" aria-label="Ask about {{ p.name }} on WhatsApp" target="_blank" rel="noopener" href="https://wa.me/{{ phone_digits }}?text={{ ('Hello Solar Support, I am interested in the ' ~ p.name ~ '. Please send me a quote.')|urlencode }}"><svg class="i"><use href="#i-whatsapp"/></svg></a>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% endfor %}
+
+    {% if brands %}
+    <div class="brands reveal">
+      <h3>Brands we supply</h3>
+      <div class="marquee"><div class="track">
+        {% for rep in range(2) %}{% for b in brands %}<span class="bpill"><img src="{{ asset('brands/' ~ b.file) }}" alt="{{ b.name }}" height="44"></span>{% endfor %}{% endfor %}
+      </div></div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- ============ CALCULATOR ============ -->
+<section class="calc" id="calculator">
+  <div class="wrap">
+    <div class="sec-head light reveal"><span class="eyebrow">Solar calculator</span><h2>What size system do you need?</h2><p>Choose the appliances you want to run. We estimate your energy use and match you to a system.</p></div>
+    <div class="calc-grid">
+      <div class="calc-left reveal">
+        <div class="calc-opts">
+          <label>Battery should cover
+            <select id="cShare"><option value="0.3">Evenings only (30%)</option><option value="0.5" selected>Overnight (50%)</option><option value="0.7">Most of the day (70%)</option></select>
+          </label>
+        </div>
+        <div class="appl" id="appl"></div>
+      </div>
+      <aside class="calc-right reveal" aria-live="polite">
+        <div class="res-top"><div><small>Daily energy</small><b><span id="rKwh">0</span><em> kWh</em></b></div><div><small>Peak load</small><b><span id="rPeak">0</span><em> kW</em></b></div></div>
+        <div class="bars">
+          <div class="bar"><span>Inverter needed</span><i><s id="bInv"></s></i><b id="tInv">0 kVA</b></div>
+          <div class="bar"><span>Battery needed</span><i><s id="bBat"></s></i><b id="tBat">0 kWh</b></div>
+          <div class="bar"><span>Solar panels needed</span><i><s id="bPv"></s></i><b id="tPv">0 kW</b></div>
+        </div>
+        <div class="reco" id="reco"><p class="muted">Add an appliance to see your recommended system.</p></div>
+        <div class="calc-cta">
+          <button class="btn btn-primary" id="cQuote" disabled>Request this quote</button>
+          <a class="btn btn-wa" id="cWa" target="_blank" rel="noopener" href="#"><svg class="i"><use href="#i-whatsapp"/></svg>Send on WhatsApp</a>
+        </div>
+        <p class="fine">Estimate only. We assume about 5.5 peak sun hours a day, 80% system efficiency and that 70% of your appliances run together. We confirm the final design after a site survey.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section class="projects" id="projects">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">Our work</span><h2>Projects we have delivered</h2><p>Homes, farms, lodges, branches and institutions across Zimbabwe.</p></div>
+    <div class="prgrid">
+      {% for p in projects %}
+      <article class="prcard reveal">
+        <div class="primg"><img src="{{ asset(p.image) }}" alt="{{ p.title }}" loading="lazy">{% if p.capacity_kw %}<span class="kw"><b class="count" data-value="{{ p.capacity_kw|int if p.capacity_kw == p.capacity_kw|int else p.capacity_kw }}">0</b> kW</span>{% endif %}</div>
+        <div class="prbody"><span class="client">{{ p.client }}{% if p.period %} <i>{{ p.period }}</i>{% endif %}</span><h3>{{ p.title }}</h3><p>{{ p.summary }}</p></div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY + REELS ============ -->
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="sec-head light reveal"><span class="eyebrow">Gallery</span><h2>Our installations in pictures</h2></div>
+    {% if videos %}
+    <div class="reels reveal">
+      {% for v in videos %}
+      <figure class="reel"><video muted loop playsinline preload="none" poster="{{ asset(v.poster) }}" data-src="{{ asset(v.path) }}" aria-label="{{ v.title }}"></video><figcaption>{{ v.title }}</figcaption><span class="live"><i></i>Live</span></figure>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <div class="gfilters reveal"><button class="chip on" data-f="all">All</button>{% for gc in gcats %}<button class="chip" data-f="{{ gc }}">{{ gc }}</button>{% endfor %}</div>
+    <div class="ggrid" id="ggrid">
+      {% for m in gallery %}<button class="gitem" data-cat="{{ m.category }}" data-full="{{ asset(m.path) }}" data-title="{{ m.title }}"><img src="{{ asset(m.path) }}" alt="{{ m.title }}" loading="lazy"><span>{{ m.title }}</span></button>{% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div class="contact-info reveal">
+      <span class="eyebrow">Contact us</span>
+      <h2>Let us power your next project</h2>
+      <p>Thank you for considering {{ c('company_name') }} for your solar and renewable energy needs. We take pride in our work and deliver exceptional service that meets and exceeds expectations.</p>
+      <ul class="clist">
+        <li><span class="ci"><svg class="i"><use href="#i-phone"/></svg></span><div><small>Call or WhatsApp</small><a href="tel:{{ c('phone_tel') }}">{{ c('phone_display') }}</a></div></li>
+        <li><span class="ci"><svg class="i"><use href="#i-mail"/></svg></span><div><small>Email</small><a href="mailto:{{ c('email') }}">{{ c('email') }}</a></div></li>
+        <li><span class="ci"><svg class="i"><use href="#i-pin"/></svg></span><div><small>Visit us</small><span>{{ c('legal_name') }}<br>{{ c('address') }}</span></div></li>
+        <li><span class="ci"><svg class="i"><use href="#i-globe"/></svg></span><div><small>Website</small><span>{{ c('website') }}</span></div></li>
+      </ul>
+      <div class="social">
+        <a href="{{ c('facebook') }}" target="_blank" rel="noopener" aria-label="Facebook"><svg class="i"><use href="#i-facebook"/></svg></a>
+        <a href="{{ c('instagram') }}" target="_blank" rel="noopener" aria-label="Instagram"><svg class="i"><use href="#i-instagram"/></svg></a>
+        <a href="{{ c('tiktok') }}" target="_blank" rel="noopener" aria-label="TikTok"><svg class="i"><use href="#i-tiktok"/></svg></a>
+        <a href="https://wa.me/{{ phone_digits }}" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="i"><use href="#i-whatsapp"/></svg></a>
+      </div>
+    </div>
+    <form class="qform reveal" id="qform" novalidate>
+      <h3>Request a free quotation</h3>
+      <p class="muted">We usually reply within one working day.</p>
+      <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <label>Your name<input name="name" autocomplete="name" required></label>
+      <div class="two"><label>Phone / WhatsApp<input name="phone" type="tel" autocomplete="tel" required></label><label>Email (optional)<input name="email" type="email" autocomplete="email"></label></div>
+      <label>I am interested in<input name="product" id="qProduct" placeholder="e.g. 5kW Deye Premium System"></label>
+      <label>Message<textarea name="message" id="qMessage" rows="4" required placeholder="Tell us about your property and what you want to power"></textarea></label>
+      <input type="hidden" name="extra" id="qExtra">
+      <button class="btn btn-primary btn-lg" type="submit">Send request</button>
+      <p class="msg" id="qMsg" role="status"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div class="foot-brand"><img src="{{ asset('img/logo-light.png') }}" alt="{{ c('company_name') }}" width="170" height="72"><p>{{ c('tagline') }}. Turnkey solar EPC solutions in Zimbabwe.</p></div>
+    <div><h4>Explore</h4><a href="#about">About</a><a href="#services">Services</a><a href="#products">Products</a><a href="#calculator">Calculator</a><a href="#projects">Projects</a></div>
+    <div><h4>Contact</h4><a href="tel:{{ c('phone_tel') }}">{{ c('phone_display') }}</a><a href="mailto:{{ c('email') }}">{{ c('email') }}</a><span>{{ c('address') }}</span></div>
+    <div><h4>Follow us</h4><div class="social"><a href="{{ c('facebook') }}" target="_blank" rel="noopener" aria-label="Facebook"><svg class="i"><use href="#i-facebook"/></svg></a><a href="{{ c('instagram') }}" target="_blank" rel="noopener" aria-label="Instagram"><svg class="i"><use href="#i-instagram"/></svg></a><a href="{{ c('tiktok') }}" target="_blank" rel="noopener" aria-label="TikTok"><svg class="i"><use href="#i-tiktok"/></svg></a><a href="https://wa.me/{{ phone_digits }}" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="i"><use href="#i-whatsapp"/></svg></a></div></div>
+  </div>
+  <div class="wrap foot-bar"><span>&copy; {{ now().year }} {{ c('legal_name') }}. All rights reserved.</span><a href="{{ url_for('login') }}">Staff login</a></div>
+</footer>
+
+<a class="fab" href="https://wa.me/{{ phone_digits }}?text={{ 'Hello Solar Support, I would like to know more about your solar systems.'|urlencode }}" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp"><svg class="i"><use href="#i-whatsapp"/></svg></a>
+<div class="mbar"><a href="tel:{{ c('phone_tel') }}"><svg class="i"><use href="#i-phone"/></svg>Call</a><a href="https://wa.me/{{ phone_digits }}" target="_blank" rel="noopener"><svg class="i"><use href="#i-whatsapp"/></svg>WhatsApp</a><a href="#contact" data-quote=""><svg class="i"><use href="#i-doc"/></svg>Quote</a></div>
+
+<div class="lightbox" id="lightbox" hidden><button class="lb-x" aria-label="Close">&times;</button><button class="lb-p" aria-label="Previous">&#8249;</button><img alt=""><button class="lb-n" aria-label="Next">&#8250;</button><p></p></div>
+
+<script type="application/json" id="calc-data">{{ calc|tojson }}</script>
+<script type="application/json" id="site-data">{{ {"wa": phone_digits, "company": c('company_name')}|tojson }}</script>
+<script src="{{ asset('js/site.js') }}" defer></script>
+</body>
+</html>

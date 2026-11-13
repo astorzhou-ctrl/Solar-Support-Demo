@@ -1,0 +1,26 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>{% block title %}Admin{% endblock %} | {{ c('company_name') }} admin</title>
+<link rel="icon" href="{{ asset('img/favicon.png') }}">
+<link rel="stylesheet" href="{{ asset('css/admin.css') }}"></head>
+<body>
+{% set ep = request.endpoint %}
+<aside class="side">
+  <a class="logo" href="{{ url_for('dashboard') }}"><img src="{{ asset('img/logo-light.png') }}" alt="{{ c('company_name') }}"></a>
+  <nav>
+    <a href="{{ url_for('dashboard') }}" class="{{ 'on' if ep=='dashboard' }}">Dashboard</a>
+    <a href="{{ url_for('prices') }}" class="{{ 'on' if ep=='prices' }}">Update prices</a>
+    <a href="{{ url_for('products_list') }}" class="{{ 'on' if ep in ('products_list','product_edit') }}">Products</a>
+    <a href="{{ url_for('projects_list') }}" class="{{ 'on' if ep in ('projects_list','project_edit') }}">Projects</a>
+    <a href="{{ url_for('media') }}" class="{{ 'on' if ep=='media' }}">Photos and videos</a>
+    <a href="{{ url_for('content_edit') }}" class="{{ 'on' if ep=='content_edit' }}">Website text and pictures</a>
+    <a href="{{ url_for('quotes') }}" class="{{ 'on' if ep=='quotes' }}">Quote requests</a>
+    <a href="{{ url_for('account') }}" class="{{ 'on' if ep=='account' }}">My password</a>
+  </nav>
+  <div class="side-foot"><a href="{{ url_for('index') }}" target="_blank">View website &#8599;</a>
+    <form method="post" action="{{ url_for('logout') }}"><input type="hidden" name="_csrf" value="{{ csrf_token() }}"><button>Log out ({{ session.user }})</button></form></div>
+</aside>
+<main class="main">
+  {% with msgs = get_flashed_messages(with_categories=true) %}{% for cat, m in msgs %}<div class="flash {{ cat }}" role="status">{{ m }}</div>{% endfor %}{% endwith %}
+  {% block body %}{% endblock %}
+</main>
+</body></html>

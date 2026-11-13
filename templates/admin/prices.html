@@ -1,0 +1,15 @@
+{% extends 'admin/base.html' %}{% block title %}Update prices{% endblock %}
+{% block body %}
+<h1>Update prices</h1><p class="muted">Type the new price in US dollars. Tick <b>Show price</b> to display it on the website, or leave it unticked to show &ldquo;Request price&rdquo;. Untick <b>On website</b> to hide a product completely.</p>
+<form method="post"><input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+<div class="card"><table class="tbl prices">
+<tr><th>Product</th><th>Category</th><th>Price (US$)</th><th>Unit (optional)</th><th>Show price</th><th>On website</th></tr>
+{% for r in rows %}<tr>
+<td><input type="hidden" name="name_{{ r.id }}" value="1"><b>{{ r.name }}</b></td><td>{{ r.category }}</td>
+<td><input class="num" name="price_{{ r.id }}" inputmode="decimal" value="{{ '' if r.price is none else ('%g' % r.price) }}" placeholder="none" aria-label="Price for {{ r.name }}"></td>
+<td><input name="unit_{{ r.id }}" value="{{ r.unit }}" placeholder="e.g. per day" aria-label="Unit for {{ r.name }}"></td>
+<td><label class="sw"><input type="checkbox" name="show_{{ r.id }}" {{ 'checked' if r.show_price }}><i></i></label></td>
+<td><label class="sw"><input type="checkbox" name="active_{{ r.id }}" {{ 'checked' if r.active }}><i></i></label></td></tr>{% endfor %}
+</table></div>
+<div class="savebar"><button class="btn">Save all prices</button><a class="btn ghost" href="{{ url_for('product_edit') }}">Add a new product</a></div></form>
+{% endblock %}
