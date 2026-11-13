@@ -1,0 +1,194 @@
+[
+ {
+  "file": "enphase.png",
+  "name": "Enphase",
+  "size": [
+   266,
+   76
+  ]
+ },
+ {
+  "file": "freedom-won.png",
+  "name": "Freedom Won",
+  "size": [
+   287,
+   88
+  ]
+ },
+ {
+  "file": "growatt.png",
+  "name": "Growatt",
+  "size": [
+   267,
+   84
+  ]
+ },
+ {
+  "file": "sma.png",
+  "name": "SMA",
+  "size": [
+   138,
+   96
+  ]
+ },
+ {
+  "file": "sunsynk.png",
+  "name": "SunSynk",
+  "size": [
+   241,
+   71
+  ]
+ },
+ {
+  "file": "victron.png",
+  "name": "Victron Energy",
+  "size": [
+   275,
+   71
+  ]
+ },
+ {
+  "file": "solis.png",
+  "name": "Solis",
+  "size": [
+   229,
+   97
+  ]
+ },
+ {
+  "file": "dyness.png",
+  "name": "Dyness",
+  "size": [
+   228,
+   56
+  ]
+ },
+ {
+  "file": "solaredge.png",
+  "name": "SolarEdge",
+  "size": [
+   267,
+   75
+  ]
+ },
+ {
+  "file": "fronius.png",
+  "name": "Fronius",
+  "size": [
+   216,
+   79
+  ]
+ },
+ {
+  "file": "jinko.png",
+  "name": "Jinko Solar",
+  "size": [
+   292,
+   113
+  ]
+ },
+ {
+  "file": "deye.png",
+  "name": "Deye",
+  "size": [
+   235,
+   96
+  ]
+ },
+ {
+  "file": "ja-solar.png",
+  "name": "JA Solar",
+  "size": [
+   229,
+   63
+  ]
+ },
+ {
+  "file": "canadian-solar.png",
+  "name": "Canadian Solar",
+  "size": [
+   325,
+   71
+  ]
+ },
+ {
+  "file": "byd.png",
+  "name": "BYD",
+  "size": [
+   192,
+   67
+  ]
+ },
+ {
+  "file": "sungrow.png",
+  "name": "Sungrow",
+  "size": [
+   313,
+   63
+  ]
+ },
+ {
+  "file": "atess.png",
+  "name": "ATESS",
+  "size": [
+   192,
+   84
+  ]
+ },
+ {
+  "file": "goodwe.png",
+  "name": "GoodWe",
+  "size": [
+   233,
+   54
+  ]
+ },
+ {
+  "file": "sigenergy.png",
+  "name": "Sigenergy",
+  "size": [
+   326,
+   75
+  ]
+ },
+ {
+  "file": "megarevo.png",
+  "name": "Megarevo",
+  "size": [
+   212,
+   125
+  ]
+ },
+ {
+  "file": "huawei.png",
+  "name": "Huawei",
+  "size": [
+   275,
+   78
+  ]
+ },
+ {
+  "file": "pylontech.png",
+  "name": "Pylontech",
+  "size": [
+   333,
+   87
+  ]
+ },
+ {
+  "file": "schneider-electric.png",
+  "name": "Schneider Electric",
+  "size": [
+   312,
+   113
+  ]
+ },
+ {
+  "file": "srne.png",
+  "name": "SRNE",
+  "size": [
+   217,
+   88
+  ]
+ }
+]
